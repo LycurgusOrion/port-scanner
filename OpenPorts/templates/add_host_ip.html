@@ -473,11 +473,7 @@
       for (i = 0; i < secure_ports_list.length; i++) {
         sp_string = sp_string + secure_ports_list.options[i].text + ",";
       }
-      $('#results').html('<div class="container">\
-          <div class="alert alert-danger alert-dismissible">\
-          <button type="button" class="close" data-dismiss="alert">&times;</button>\
-          <strong>Oops!</strong> Something went wrong!.\
-          </div></div>');
+      
       for (i = 0; i < open_port_list.length; i++) {
         op_string = op_string + open_port_list.options[i].text + ",";
       }
