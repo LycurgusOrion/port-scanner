@@ -92,12 +92,17 @@ def addnewhost(request):
     print(request.GET.get('open_ports'))
     print(request.GET.get('secure_ports'))
 
+    open_ports = request.GET.get('open_ports') if 'Open Ports' in request.GET.get(
+        'open_ports') else 'open,'+str(request.GET.get('open_ports'))+','
+    secure_ports = request.GET.get('secure_ports') if 'Firewalled Ports' in request.GET.get(
+        'secure_ports') else 'secure,'+str(request.GET.get('secure_ports'))+','
+
     addHostToDB.delay(request.user.username,
                       request.GET.get('host_ip'),
                       request.GET.get('hostname'),
                       request.GET.get('provider'),
-                      'secure,'+str(request.GET.get('secure_ports'))+',',
-                      'open,'+str(request.GET.get('open_ports'))+',',
+                      secure_ports,
+                      open_ports,
                       request.GET.get('full_scan_flag'),
                       secure_proxy,
                       unsecure_proxy)
@@ -1748,3 +1753,8 @@ def lastInaccessible(host, port):
 
 def add_mul_hosts(request):
     return render(request, 'add_mul_hosts.html', {})
+
+
+def scanAllCSVHosts(request):
+    scanAllHosts.delay()
+    return HttpResponse('Success')

@@ -190,6 +190,7 @@ def addHostToDB(
     secure_proxy,
     unsecure_proxy
 ):
+    csv_flag = False if 'Open Ports' in open_ports else True
 
     user = User.objects.get(username=username)
     host = Host(
@@ -224,11 +225,10 @@ def addHostToDB(
     sp.save()
     up.save()
 
-    scanLastHost.delay(username)
-    if full_scan_flag == 'true':
-        fullScanLastHost.delay(username, host_primary_key)
-    else:
-        pass
+    if not csv_flag:
+        scanLastHost.delay(username)
+        if full_scan_flag == 'true':
+            fullScanLastHost.delay(username, host_primary_key)
 
 
 @app.task

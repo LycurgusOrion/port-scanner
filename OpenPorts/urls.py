@@ -55,5 +55,6 @@ urlpatterns = [
         views.add_filters_view_report,
         name="add_filters_view_report"
     ),
-    url(r'^home/add_mul_hosts$', views.add_mul_hosts, name='add_mul_hosts')
+    url(r'^home/add_mul_hosts$', views.add_mul_hosts, name='add_mul_hosts'),
+    url(r'^home/scanAllCSVHosts$', views.scanAllCSVHosts, name='scanAllCSVHosts')
 ]

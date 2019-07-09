@@ -58,7 +58,7 @@
     async function sendMultiHosts(data) {
 
       for (i = 0; i < data['length']; i++) {
-        await sleep(1000);
+        await sleep(500);
         $.ajax({
           type: "GET",
           url: document.URL + "/addnewhost",
@@ -87,6 +87,13 @@
           }
         });
       }
+
+      $.ajax({
+        type: "GET",
+        url: document.URL + "/scanAllCSVHosts",
+        dataType: 'html'
+      });
+
     }
 
     function handleFileSelect(evt) {
